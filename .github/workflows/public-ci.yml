@@ -42,10 +42,33 @@ jobs:
         working-directory: ${{ runner.temp }}/rag-public-code
         run: '& "$env:RUNNER_TEMP/rag-public-venv/Scripts/python.exe" -m pip install -r requirements.lock'
       - name: Run ${{ matrix.check }}
+        if: matrix.check != 'index-integrity'
         working-directory: ${{ runner.temp }}/rag-public-code
         env:
           PUBLIC_CHECK: ${{ matrix.check }}
         run: '& "$env:RUNNER_TEMP/rag-public-venv/Scripts/python.exe" tests/run_public_tests.py --check $env:PUBLIC_CHECK'
+      - name: Run index-integrity with a dedicated temporary root
+        if: matrix.check == 'index-integrity'
+        working-directory: ${{ runner.temp }}/rag-public-code
+        run: |
+          $testTemp = Join-Path $env:PUBLIC 'Documents\rag-index-integrity-temp'
+          New-Item -ItemType Directory -Path $testTemp -Force | Out-Null
+          $env:TEMP = $testTemp
+          $env:TMP = $testTemp
+          $env:TMPDIR = $null
+          @'
+          import os
+          import runpy
+          import tempfile
+          from pathlib import Path
+
+          actual = Path(tempfile.gettempdir())
+          expected = Path(os.environ["TEMP"])
+          if actual != expected:
+              raise SystemExit(f"Python selected temporary root {actual}, expected {expected}")
+          print(f"Python temporary root: {actual}", flush=True)
+          runpy.run_path("tests/run_public_tests.py", run_name="__main__")
+          '@ | & "$env:RUNNER_TEMP/rag-public-venv/Scripts/python.exe" - --check index-integrity
 
   secret-scan:
     name: public-secret-scan

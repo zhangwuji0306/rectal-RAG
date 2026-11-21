@@ -1,5 +1,6 @@
 """Synthetic-only Windows stable-copy validation; no production data imports."""
 import copy
+import ctypes
 import hashlib
 import json
 import os
@@ -8,6 +9,7 @@ import subprocess
 import sys
 import tempfile
 import unittest
+from contextlib import contextmanager
 from dataclasses import replace
 from pathlib import Path
 from unittest.mock import Mock, patch
@@ -16,6 +18,53 @@ from index import stable_copy as sc
 
 def write(path, obj):
     path.write_text(json.dumps(obj), encoding="utf-8")
+
+
+@contextmanager
+def user_owned_test_directories():
+    from ctypes import wintypes as w
+
+    token_query, token_adjust_default = 0x0008, 0x0080
+    token_user, token_owner = 1, 4
+    api = ctypes.WinDLL("advapi32", use_last_error=True)
+    kernel = ctypes.WinDLL("kernel32", use_last_error=True)
+    api.OpenProcessToken.argtypes = [w.HANDLE, w.DWORD, ctypes.POINTER(w.HANDLE)]
+    api.GetTokenInformation.argtypes = [w.HANDLE, ctypes.c_int, ctypes.c_void_p,
+                                        w.DWORD, ctypes.POINTER(w.DWORD)]
+    api.SetTokenInformation.argtypes = [w.HANDLE, ctypes.c_int, ctypes.c_void_p, w.DWORD]
+    kernel.GetCurrentProcess.restype = w.HANDLE
+    kernel.CloseHandle.argtypes = [w.HANDLE]
+
+    token = w.HANDLE()
+    if not api.OpenProcessToken(kernel.GetCurrentProcess(), token_query | token_adjust_default,
+                                ctypes.byref(token)):
+        raise ctypes.WinError(ctypes.get_last_error())
+
+    def token_sid(info_class):
+        size = w.DWORD()
+        api.GetTokenInformation(token, info_class, None, 0, ctypes.byref(size))
+        if not size.value:
+            raise ctypes.WinError(ctypes.get_last_error())
+        buffer = ctypes.create_string_buffer(size.value)
+        if not api.GetTokenInformation(token, info_class, buffer, size, ctypes.byref(size)):
+            raise ctypes.WinError(ctypes.get_last_error())
+        # Both structures start with a SID pointer. Keep its backing buffer alive.
+        return ctypes.c_void_p.from_buffer(buffer)
+
+    def set_owner(sid):
+        if not api.SetTokenInformation(token, token_owner, ctypes.byref(sid), ctypes.sizeof(sid)):
+            raise ctypes.WinError(ctypes.get_last_error())
+
+    try:
+        original_owner = token_sid(token_owner)
+        # Elevated Windows tokens can default to a group owner for new directories.
+        set_owner(token_sid(token_user))
+        try:
+            yield
+        finally:
+            set_owner(original_owner)
+    finally:
+        kernel.CloseHandle(token)
 
 
 def fixture(base):
@@ -238,7 +287,12 @@ class SchemaTests(unittest.TestCase):
 
 @unittest.skipUnless(os.name == "nt", "Windows share semantics required")
 class ControllerTests(unittest.TestCase):
-    setUp = SchemaTests.setUp
+    def setUp(self):
+        SchemaTests.setUp(self)
+        protected = Path(self.tmp.name) / "implicit-protection"
+        self.implicit_protected_roots = (protected / "index", protected / "model")
+        self.enterContext(patch.object(sc, "PRODUCTION_ROOTS", self.implicit_protected_roots))
+        self.enterContext(user_owned_test_directories())
 
     def assert_alias_refused(self, spec):
         before = self.source_state()
@@ -468,6 +522,14 @@ class ControllerTests(unittest.TestCase):
                 self.assert_lock_collision_refused(
                     replace(self.spec, temp_root=root, run_root=root / "new-output"),
                     "target overlaps input/production root")
+
+    def test_output_inside_implicit_protected_tree_refused_before_lock_or_create(self):
+        root = self.implicit_protected_roots[0]
+        root.mkdir(parents=True)
+        spec = replace(self.spec, temp_root=root, run_root=root / "new-output")
+        with patch.object(Path, "mkdir") as mkdir:
+            self.assert_lock_collision_refused(spec, "target overlaps input/production root")
+            mkdir.assert_not_called()
 
     def test_output_exact_resource_overlap_gate(self):
         # Existing Leaves normally stop at the new-root check first. Bypass
