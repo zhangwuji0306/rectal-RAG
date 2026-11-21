@@ -21,7 +21,7 @@ py -3.12 -m venv .venv
 .venv/Scripts/python.exe tests/run_public_tests.py
 ```
 
-可用 `--check` 运行一个公共分组。分组、六个 required check 名称和目标仓库核验步骤见[发布清单](docs/数据合规与发布清单.md#d4-公共-ci-与目标仓库)。
+可用 `--check unit` 单独运行公共单元测试组。分组、六个 required check 名称和目标仓库核验步骤见[发布清单](docs/数据合规与发布清单.md#d4-公共-ci-与目标仓库)。
 
 ## Corpus Policy
 
