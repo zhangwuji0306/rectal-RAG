@@ -1,0 +1,78 @@
+.venv/
+.model-cache/
+
+# Local vector database may contain complete document chunks; never publish it.
+/index/chroma_db/
+/index/chroma_db.*/
+.claude/tmp/chroma-backups/
+
+**/__pycache__/
+*.py[cod]
+
+*.pdf
+/converted/**/*.md
+/mucinous/**/*.md
+
+*.log
+*.sqlite-shm
+*.sqlite-wal
+.claude/settings.local.json
+.claude/tmp/crawler-backups/
+.claude/tmp/manifest-backups/
+.claude/tmp/github-backups/
+
+# A0 restore points are local-only and must not enter the public repository.
+/backups/
+
+.env
+.env.*
+!.env.example
+**/.mineru/
+**/config.yaml
+
+# Normalized corpus is a local derived artifact; only test fixtures are published.
+/normalized/
+!tests/fixtures/a7_article.pdf
+
+# Raw retrieved full text (XML/HTML/source manifests) stays local only.
+/corpus_raw/
+# Production acquisition database and its journals/WAL are runtime state that
+# also records local absolute paths.
+/直肠癌文献爬取/tasks.sqlite
+/直肠癌文献爬取/tasks.sqlite-wal
+/直肠癌文献爬取/tasks.sqlite-shm
+/直肠癌文献爬取/*.nbib
+# Runtime reports contain local absolute paths and are regenerated locally.
+/直肠癌文献爬取/reports/download_report.csv
+/直肠癌文献爬取/reports/run_history.csv
+# Downloaded third-party browser driver binaries stay out of the release scope.
+/直肠癌文献爬取/scripts/drivers/
+# Generated release artifacts.
+/dist/
+/.claude/tmp/d2-acceptance-20261109/
+/.claude/tmp/d2-ui-20261109/
+/人工标注/D2核验/标注结果/
+/人工标注/D2核验/导出结果/
+/.claude/tmp/p16-d3-private/
+
+# Local D4 cleanup: keep the original files on disk.
+/.claude/tmp/audit.py
+/.claude/tmp/audit2.py
+/.claude/tmp/bench_convert.py
+/.claude/tmp/debug_csv.py
+/.claude/tmp/debug_prescan.py
+/.claude/tmp/scan_pages.py
+/.claude/tmp/page_scan.json
+/.claude/tmp/verify_t2.py
+/.claude/conversion-tracker.json
+/直肠癌文献爬取/reports/archive_pre2000.csv
+/直肠癌文献爬取/reports/batch810.csv
+/直肠癌文献爬取/reports/pmc_batches.csv
+/直肠癌文献爬取/reports/sample_1000.csv
+/直肠癌文献爬取/reports/sample_400.csv
+/直肠癌文献爬取/reports/sample_50.csv
+/直肠癌文献爬取/reports/source_licenses.csv
+/直肠癌文献爬取/reports/summary.txt
+/直肠癌文献爬取/reports/template_merged.csv
+/直肠癌文献爬取/pdfs_merged/summary.txt
+/直肠癌文献爬取/pdfs_merged/语料元数据.csv

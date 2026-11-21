@@ -1,0 +1,35 @@
+{
+  "mirrors": [
+    "https://sci-hub.st",
+    "https://sci-hub.ee"
+  ],
+  "verify_ssl": true,
+  "user_agent": "Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/126.0.0.0 Safari/537.36",
+  "request_interval_min": 3.0,
+  "request_interval_max": 5.0,
+  "pause_after_min": 200,
+  "pause_after_max": 300,
+  "pause_duration_min": 120,
+  "pause_duration_max": 180,
+  "workers": 3,
+  "min_pdf_size": 30720,
+  "cookie_refresh_minutes": 30,
+  "crossref_similarity": 0.85,
+  "title_similarity_accept": 0.7,
+  "challenge_threshold": 5,
+  "page_timeout": 45,
+  "download_timeout": 90,
+  "seed": 42,
+  "selenium_timeout": 90,
+  "stale_requeue_minutes": 15,
+  "mirror_dead_seconds": 600,
+  "allow_scihub": false,
+  "retry": {
+    "max_attempts": 3,
+    "connect_timeout": 45.0,
+    "read_timeout": 90.0,
+    "backoff_base_seconds": 1.0,
+    "backoff_max_seconds": 60.0,
+    "jitter_seconds": 0.5
+  }
+}

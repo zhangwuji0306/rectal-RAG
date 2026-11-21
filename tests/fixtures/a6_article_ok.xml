@@ -1,0 +1,60 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE article PUBLIC "-//NLM//DTD JATS (Z39.96) Journal Publishing DTD v1.2 20190208//EN" "http://jats.nlm.nih.gov/publishing/1.2/JATS-journalpublishing1.dtd">
+<article article-type="research-article" dtd-version="1.2">
+  <front>
+    <journal-meta>
+      <journal-title-group>
+        <journal-title>Journal of A6 Synthetic Fixtures</journal-title>
+      </journal-title-group>
+      <issn pub-type="ppub">0000-0000</issn>
+    </journal-meta>
+    <article-meta>
+      <article-id pub-id-type="pmid">6001</article-id>
+      <article-id pub-id-type="pmc">PMC6001</article-id>
+      <article-id pub-id-type="doi">10.1000/a6.fixture</article-id>
+      <title-group>
+        <article-title>Neoadjuvant chemoradiotherapy for locally advanced rectal cancer</article-title>
+      </title-group>
+      <contrib-group>
+        <contrib contrib-type="author">
+          <name><surname>Smith</surname><given-names>Jane Q</given-names></name>
+        </contrib>
+        <contrib contrib-type="author">
+          <name><surname>Jones</surname><given-names>Robert</given-names></name>
+        </contrib>
+      </contrib-group>
+      <pub-date pub-type="epub">
+        <year>2020</year>
+        <month>03</month>
+      </pub-date>
+      <abstract>
+        <p>Synthetic fixture article used only by the offline A6 tests.</p>
+      </abstract>
+    </article-meta>
+  </front>
+  <body>
+    <sec id="s1">
+      <title>Introduction</title>
+      <p>Locally advanced rectal cancer is routinely treated with neoadjuvant chemoradiotherapy followed by total mesorectal excision. Magnetic resonance imaging defines the clinical stage that drives the choice between long-course chemoradiotherapy and total neoadjuvant therapy. The present synthetic fixture exists only to exercise the offline A6 validation path and must never be treated as clinical evidence of any kind.</p>
+    </sec>
+    <sec id="s2">
+      <title>Methods</title>
+      <p>Eligible records were identified from a synthetic fixture list maintained inside this repository. Two independent readers annotated the mesorectal fascia, extramural venous invasion and tumour regression grade. Disagreements were resolved by consensus. The analysis plan was fixed before the first assessment and no outcome data were used to tune the reading rules afterwards.</p>
+    </sec>
+    <sec id="s3">
+      <title>Results</title>
+      <p>Ninety synthetic records were included in the fixture cohort. A complete pathological response was observed in twenty-two records and a near-complete response was observed in a further eleven records. Agreement between readers was substantial for extramural venous invasion and moderate for tumour regression grade.</p>
+    </sec>
+    <sec id="s4">
+      <title>Discussion</title>
+      <p>These synthetic findings illustrate how a validation fixture can carry a plausible body without describing real patients. The text is intentionally long enough to exceed the centrally defined minimum body length so that the fixture isolates bibliographic matching rather than content size.</p>
+    </sec>
+  </body>
+  <back>
+    <ref-list>
+      <ref id="r1">
+        <mixed-citation>Nguyen T, Patel R. Cited work that belongs to another article. J A6 Fixtures. 2015;<pub-id pub-id-type="pmid">999999</pub-id>. doi:10.9999/other.fixture</mixed-citation>
+      </ref>
+    </ref-list>
+  </back>
+</article>

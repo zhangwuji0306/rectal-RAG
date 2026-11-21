@@ -1,0 +1,33 @@
+A7 normalization fixture article
+
+Abstract
+Abstract text is retained in the normalized corpus.
+
+Introduction
+Introduction text for the shared normalization contract.
+
+Methods
+Methods text describes the synthetic fixture.
+
+Results
+Results text is intentionally short because A7 tests structure.
+
+Discussion
+Discussion text remains under a stable heading.
+
+Conclusion
+Conclusion text is retained.
+
+Table 1. Baseline characteristics
+| Feature | Count |
+| --- | --- |
+| Patients | 12 |
+
+Figure 1. Workflow overview
+Figure caption text is retained.
+
+Supplementary information
+Supplementary information is retained.
+
+References
+1. Example A. A cited article. doi:10.1000/cited.

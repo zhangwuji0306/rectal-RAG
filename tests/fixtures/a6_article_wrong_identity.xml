@@ -1,0 +1,51 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<article article-type="research-article" dtd-version="1.2">
+  <front>
+    <journal-meta>
+      <journal-title-group>
+        <journal-title>Journal of A6 Synthetic Fixtures</journal-title>
+      </journal-title-group>
+    </journal-meta>
+    <article-meta>
+      <article-id pub-id-type="pmid">9999</article-id>
+      <article-id pub-id-type="pmc">PMC9999</article-id>
+      <article-id pub-id-type="doi">10.9999/other.fixture</article-id>
+      <title-group>
+        <article-title>Neoadjuvant chemoradiotherapy for locally advanced rectal cancer</article-title>
+      </title-group>
+      <contrib-group>
+        <contrib contrib-type="author">
+          <name><surname>Nguyen</surname><given-names>Thu</given-names></name>
+        </contrib>
+        <contrib contrib-type="author">
+          <name><surname>Patel</surname><given-names>Ravi</given-names></name>
+        </contrib>
+      </contrib-group>
+      <pub-date pub-type="epub">
+        <year>2015</year>
+        <month>07</month>
+      </pub-date>
+      <abstract>
+        <p>Synthetic fixture article describing a different publication.</p>
+      </abstract>
+    </article-meta>
+  </front>
+  <body>
+    <sec id="s1">
+      <title>Introduction</title>
+      <p>This fixture deliberately reuses the title of the canonical fixture while declaring different identifiers, authors and publication year, so that the offline A6 tests can prove that a strong identifier conflict is never overridden by a similar title. The body is otherwise plausible shaped text with no clinical meaning whatsoever.</p>
+    </sec>
+    <sec id="s2">
+      <title>Methods</title>
+      <p>A synthetic record set was assembled from an unrelated fixture list. Two independent readers annotated unrelated imaging features and disagreements were resolved by consensus. The reading rules were fixed before the first assessment so that the fixture body stays stable across test runs and operating systems.</p>
+    </sec>
+    <sec id="s3">
+      <title>Results</title>
+      <p>Forty synthetic records were included in this unrelated fixture cohort. Agreement between readers was moderate for every annotated feature and no outcome analysis was attempted because the records describe nothing real and exist only to satisfy the minimum body length requirement.</p>
+    </sec>
+    <sec id="s4">
+      <title>Discussion</title>
+      <p>The only purpose of this fixture is to be parseable, long enough and clearly attributable to a publication other than the canonical task. A correct A6 implementation must reject it with an identifier mismatch and must leave the canonical task outside the fulltext ready state.</p>
+    </sec>
+  </body>
+</article>

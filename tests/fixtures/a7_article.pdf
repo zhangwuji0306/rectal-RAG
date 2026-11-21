@@ -1,0 +1,110 @@
+%PDF-1.3
+%‚„œ”
+1 0 obj
+<<
+/Producer (pypdf)
+/Title (A7 normalization fixture article)
+>>
+endobj
+2 0 obj
+<<
+/Type /Pages
+/Count 1
+/Kids [ 4 0 R ]
+>>
+endobj
+3 0 obj
+<<
+/Type /Catalog
+/Pages 2 0 R
+>>
+endobj
+4 0 obj
+<<
+/Type /Page
+/Resources <<
+/Font <<
+/F1 <<
+/Type /Font
+/Subtype /Type1
+/BaseFont /Helvetica
+>>
+>>
+>>
+/MediaBox [ 0.0 0.0 612 792 ]
+/Parent 2 0 R
+/Contents 5 0 R
+>>
+endobj
+5 0 obj
+<<
+/Length 844
+>>
+stream
+BT
+/F1 10 Tf
+12 TL
+36 756 Td
+(A7 normalization fixture article) Tj
+T*
+(Abstract) Tj
+T*
+(Abstract text is retained in the normalized corpus.) Tj
+T*
+(Introduction) Tj
+T*
+(Introduction text for the shared normalization contract.) Tj
+T*
+(Methods) Tj
+T*
+(Methods text describes the synthetic fixture.) Tj
+T*
+(Results) Tj
+T*
+(Results text is intentionally short because A7 tests structure.) Tj
+T*
+(Discussion) Tj
+T*
+(Discussion text remains under a stable heading.) Tj
+T*
+(Conclusion) Tj
+T*
+(Conclusion text is retained.) Tj
+T*
+(Table 1. Baseline characteristics) Tj
+T*
+(Feature | Count) Tj
+T*
+(Patients | 12) Tj
+T*
+(Figure 1. Workflow overview) Tj
+T*
+(Figure caption text is retained.) Tj
+T*
+(Supplementary information) Tj
+T*
+(Supplementary information is retained.) Tj
+T*
+(References) Tj
+T*
+(1. Example A. A cited article. doi:10.1000/cited.) Tj
+ET
+endstream
+endobj
+xref
+0 6
+0000000000 65535 f
+0000000015 00000 n
+0000000096 00000 n
+0000000155 00000 n
+0000000204 00000 n
+0000000385 00000 n
+trailer
+<<
+/Size 6
+/Root 3 0 R
+/Info 1 0 R
+>>
+startxref
+1280
+%%EOF

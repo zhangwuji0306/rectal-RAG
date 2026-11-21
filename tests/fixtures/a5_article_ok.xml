@@ -1,0 +1,57 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE article PUBLIC "-//NLM//DTD JATS (Z39.96) Journal Publishing DTD v1.2 20190208//EN" "http://jats.nlm.nih.gov/publishing/1.2/JATS-journalpublishing1.dtd">
+<article article-type="research-article" dtd-version="1.2">
+  <front>
+    <journal-meta>
+      <journal-title-group>
+        <journal-title>Journal of A5 Synthetic Fixtures</journal-title>
+      </journal-title-group>
+      <issn pub-type="ppub">0000-0001</issn>
+    </journal-meta>
+    <article-meta>
+      <article-id pub-id-type="pmid">5001</article-id>
+      <article-id pub-id-type="pmc">PMC5001</article-id>
+      <article-id pub-id-type="doi">10.1000/a5</article-id>
+      <title-group>
+        <article-title>A5 full-text test article</article-title>
+      </title-group>
+      <contrib-group>
+        <contrib contrib-type="author">
+          <name><surname>Walker</surname><given-names>Anna K</given-names></name>
+        </contrib>
+      </contrib-group>
+      <pub-date pub-type="epub">
+        <year>2021</year>
+        <month>06</month>
+      </pub-date>
+      <abstract>
+        <p>Synthetic fixture article used only by the offline A5 acquisition tests.</p>
+      </abstract>
+    </article-meta>
+  </front>
+  <body>
+    <sec id="s1">
+      <title>Introduction</title>
+      <p>This synthetic record exists so that the offline A5 acquisition tests can drive one fetch through the canonical candidate loop and the A6 content validation step without any network access. Total neoadjuvant therapy has become a common strategy for locally advanced rectal cancer, and the choice between induction chemotherapy and consolidation chemotherapy remains an open question in everyday practice.</p>
+    </sec>
+    <sec id="s2">
+      <title>Methods</title>
+      <p>The fixture body is written to exceed the centrally defined minimum body length so that A6 classifies it as parseable content rather than as a truncated artifact. No real record, patient or measurement is described here, and the numbers below carry no clinical meaning whatsoever.</p>
+    </sec>
+    <sec id="s3">
+      <title>Results</title>
+      <p>Thirty synthetic records were processed end to end by the offline fixtures. Twenty-eight produced a validated body, one was rejected because its declared identifier contradicted the canonical metadata, and one was rejected because the extracted body was shorter than the required minimum.</p>
+    </sec>
+    <sec id="s4">
+      <title>Discussion</title>
+      <p>Keeping the acquisition fixtures small and deterministic makes it possible to assert the exact failure stage for each candidate, which is why this document intentionally repeats the same synthetic statements in slightly different wording throughout the body sections.</p>
+    </sec>
+  </body>
+  <back>
+    <ref-list>
+      <ref id="r1">
+        <mixed-citation>Example A. A cited work that belongs to another article. J A5 Fixtures. 2019;<pub-id pub-id-type="pmid">888888</pub-id>. doi:10.9999/a5.other</mixed-citation>
+      </ref>
+    </ref-list>
+  </back>
+</article>

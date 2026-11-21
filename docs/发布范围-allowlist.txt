@@ -1,0 +1,55 @@
+# 代码发布物 allowlist（D-R4 / D4）
+
+本文件定义代码分发候选的路径。工作树组装适用于干净代码集；提交候选应从已核定的
+Git tree 选择这些路径，避免带入本机未提交变更。整棵本机 Git tree 和可达历史须单独核查。
+
+允许发布的路径：
+
+```
+AGENTS.md
+README.md
+.gitattributes
+.gitignore
+.env.example
+.github/workflows/public-ci.yml
+requirements.lock
+index/*.py
+tests/*.py
+tests/fixtures/a5_article_ok.xml
+tests/fixtures/a6_article_namespace.xml
+tests/fixtures/a6_article_ok.xml
+tests/fixtures/a6_article_reference_only.xml
+tests/fixtures/a6_article_small_body.xml
+tests/fixtures/a6_article_wrong_identity.xml
+tests/fixtures/a7_article.pdf
+tests/fixtures/a7_article.txt
+tests/fixtures/a7_article.xml
+tests/fixtures/d1_articles.json
+tests/fixtures/pubmed_a2_sample.xml
+tests/fixtures/sample.md
+.claude/batch_convert.py
+直肠癌文献爬取/AGENT.md
+直肠癌文献爬取/config.json
+直肠癌文献爬取/scripts/*.py
+docs/数据合规与发布清单.md
+docs/发布范围-allowlist.txt
+evaluation/D3-rubric.md
+evaluation/README.md
+evaluation/validate_gold_set.py
+evaluation/queries.example.jsonl
+```
+
+明确不发布（即使曾被跟踪）：
+
+- `corpus_raw/`：原始全文 XML/HTML 与 source manifest。
+- `converted/`、`mucinous/`、`normalized/`、`papers/`、`pdfs_merged/`、`corpus_raw/`：
+  语料正文与其派生 Markdown。
+- `index/chroma_db*`、`index/*manifest*.json`、`index/b3-*.json`、`.claude/tmp/*backups/`：
+  向量库、账本与备份。
+- `直肠癌文献爬取/tasks.sqlite*`、`直肠癌文献爬取/索引信息.csv`、`papers/索引信息.csv`、
+  `直肠癌文献爬取/pubmed-*.nbib`、`直肠癌文献爬取/reports/`：运行数据库、元数据导出与
+  运行报告（含本地绝对路径）。
+- `backups/`、`archive/`、`.venv/`、`.model-cache/`、`dist/`、`.env*`（除 `.env.example`）。
+- `B2_gold_annotations.jsonl`、`evaluation/queries.jsonl`、`evaluation/split_manifest.json`、
+  `evaluation/test_freeze.md` 是本地 Gold、判断与冻结记录。`evaluation/queries.example.jsonl` 是公开模板。
+- `人工标注/`、内部整改及评审材料、baseline 快照、`.claude/tmp/`、本机编辑器配置和归档属于本机维护范围。

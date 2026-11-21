@@ -1,0 +1,62 @@
+name: Public CI
+
+on:
+  pull_request:
+    branches: [main]
+  push:
+    branches: [main]
+  merge_group:
+  workflow_dispatch:
+
+permissions:
+  contents: read
+
+env:
+  PYTHONIOENCODING: utf-8
+  PYTHONDONTWRITEBYTECODE: '1'
+  HF_HUB_OFFLINE: '1'
+  TRANSFORMERS_OFFLINE: '1'
+  ANONYMIZED_TELEMETRY: 'False'
+
+jobs:
+  public-tests:
+    name: public-${{ matrix.check }}
+    runs-on: windows-2022
+    timeout-minutes: 30
+    strategy:
+      fail-fast: false
+      matrix:
+        check: [unit, integration, schema-validation, index-integrity, retrieval-regression]
+    steps:
+      - uses: actions/checkout@df4cb1c069e1874edd31b4311f1884172cec0e10 # v6.0.3
+        with:
+          persist-credentials: false
+      - uses: actions/setup-python@ece7cb06caefa5fff74198d8649806c4678c61a1 # v6.3.0
+        with:
+          python-version: '3.12.0'
+      - name: Assemble and scan clean test inputs
+        run: python tests/release_scope.py --verify-checkout --output "$env:RUNNER_TEMP/rag-public-code"
+      - name: Create test environment
+        run: python -m venv "$env:RUNNER_TEMP/rag-public-venv"
+      - name: Install pinned runtime
+        working-directory: ${{ runner.temp }}/rag-public-code
+        run: '& "$env:RUNNER_TEMP/rag-public-venv/Scripts/python.exe" -m pip install -r requirements.lock'
+      - name: Run ${{ matrix.check }}
+        working-directory: ${{ runner.temp }}/rag-public-code
+        env:
+          PUBLIC_CHECK: ${{ matrix.check }}
+        run: '& "$env:RUNNER_TEMP/rag-public-venv/Scripts/python.exe" tests/run_public_tests.py --check $env:PUBLIC_CHECK'
+
+  secret-scan:
+    name: public-secret-scan
+    runs-on: windows-2022
+    timeout-minutes: 10
+    steps:
+      - uses: actions/checkout@df4cb1c069e1874edd31b4311f1884172cec0e10 # v6.0.3
+        with:
+          persist-credentials: false
+      - uses: actions/setup-python@ece7cb06caefa5fff74198d8649806c4678c61a1 # v6.3.0
+        with:
+          python-version: '3.12.0'
+      - name: Verify the checkout and scan the distribution files
+        run: python tests/release_scope.py --verify-checkout --output "$env:RUNNER_TEMP/rag-public-code"
