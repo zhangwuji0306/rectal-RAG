@@ -238,7 +238,11 @@ class SchemaTests(unittest.TestCase):
 
 @unittest.skipUnless(os.name == "nt", "Windows share semantics required")
 class ControllerTests(unittest.TestCase):
-    setUp = SchemaTests.setUp
+    def setUp(self):
+        SchemaTests.setUp(self)
+        protected = Path(self.tmp.name) / "implicit-protection"
+        self.implicit_protected_roots = (protected / "index", protected / "model")
+        self.enterContext(patch.object(sc, "PRODUCTION_ROOTS", self.implicit_protected_roots))
 
     def assert_alias_refused(self, spec):
         before = self.source_state()
@@ -468,6 +472,14 @@ class ControllerTests(unittest.TestCase):
                 self.assert_lock_collision_refused(
                     replace(self.spec, temp_root=root, run_root=root / "new-output"),
                     "target overlaps input/production root")
+
+    def test_output_inside_implicit_protected_tree_refused_before_lock_or_create(self):
+        root = self.implicit_protected_roots[0]
+        root.mkdir(parents=True)
+        spec = replace(self.spec, temp_root=root, run_root=root / "new-output")
+        with patch.object(Path, "mkdir") as mkdir:
+            self.assert_lock_collision_refused(spec, "target overlaps input/production root")
+            mkdir.assert_not_called()
 
     def test_output_exact_resource_overlap_gate(self):
         # Existing Leaves normally stop at the new-root check first. Bypass
